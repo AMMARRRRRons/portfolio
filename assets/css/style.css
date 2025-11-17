@@ -194,6 +194,15 @@ section {
     animation: shimmer 2s infinite linear;
 }
 
+/* Photo styling */
+img[alt="Ons Ammar"] {
+    transition: transform 0.3s ease;
+}
+
+img[alt="Ons Ammar"]:hover {
+    transform: scale(1.05);
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .skill-card {
