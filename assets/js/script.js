@@ -2,13 +2,6 @@
 // JavaScript for Ons Ammar Portfolio
 // ============================================
 
-// DOM Elements
-const darkModeToggle = document.getElementById('darkModeToggle');
-const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-const mobileMenu = document.getElementById('mobileMenu');
-const contactForm = document.getElementById('contactForm');
-const navLinks = document.querySelectorAll('.nav-link');
-
 // ============================================
 // Dark Mode Toggle
 // ============================================
@@ -28,158 +21,233 @@ function toggleDarkMode() {
     document.documentElement.classList.toggle('dark');
     const isDark = document.documentElement.classList.contains('dark');
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    console.log('Dark mode toggled:', isDark ? 'dark' : 'light');
 }
 
 // Initialize dark mode immediately (before DOM is ready to avoid flash)
 initDarkMode();
 
-// Event listener for dark mode toggle (wait for DOM)
+// Wait for DOM to be ready
 document.addEventListener('DOMContentLoaded', () => {
+    // Get DOM elements after DOM is loaded
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const contactForm = document.getElementById('contactForm');
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    // ============================================
+    // Dark Mode Toggle Event Listener
+    // ============================================
     if (darkModeToggle) {
-        darkModeToggle.addEventListener('click', toggleDarkMode);
+        darkModeToggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleDarkMode();
+        });
+        console.log('Dark mode toggle button found and event listener attached');
+    } else {
+        console.error('Dark mode toggle button not found!');
     }
-});
 
-// ============================================
-// Mobile Menu Toggle
-// ============================================
-function toggleMobileMenu() {
-    if (mobileMenu) {
-        mobileMenu.classList.toggle('show');
-        const icon = mobileMenuToggle.querySelector('i');
-        if (mobileMenu.classList.contains('show')) {
-            icon.classList.remove('fa-bars');
-            icon.classList.add('fa-times');
-        } else {
-            icon.classList.remove('fa-times');
-            icon.classList.add('fa-bars');
+    // ============================================
+    // Mobile Menu Toggle
+    // ============================================
+    function toggleMobileMenu() {
+        if (mobileMenu) {
+            mobileMenu.classList.toggle('show');
+            const icon = mobileMenuToggle?.querySelector('i');
+            if (icon) {
+                if (mobileMenu.classList.contains('show')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            }
         }
     }
-}
 
-// Event listener for mobile menu toggle
-if (mobileMenuToggle) {
-    mobileMenuToggle.addEventListener('click', toggleMobileMenu);
-}
+    // Event listener for mobile menu toggle
+    if (mobileMenuToggle) {
+        mobileMenuToggle.addEventListener('click', toggleMobileMenu);
+    }
 
-// Close mobile menu when clicking on a link
-navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        if (mobileMenu && mobileMenu.classList.contains('show')) {
+    // Close mobile menu when clicking on a link
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (mobileMenu && mobileMenu.classList.contains('show')) {
+                toggleMobileMenu();
+            }
+        });
+    });
+
+    // ============================================
+    // Smooth Scroll for Navigation Links
+    // ============================================
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            const href = link.getAttribute('href');
+            
+            // Only handle anchor links
+            if (href && href.startsWith('#')) {
+                e.preventDefault();
+                const targetId = href.substring(1);
+                const targetElement = document.getElementById(targetId);
+                
+                if (targetElement) {
+                    const headerOffset = 80;
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                    
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        });
+    });
+
+    // ============================================
+    // Active Navigation Link on Scroll
+    // ============================================
+    function updateActiveNavLink() {
+        const sections = document.querySelectorAll('section[id]');
+        const scrollY = window.pageYOffset;
+        
+        sections.forEach(section => {
+            const sectionHeight = section.offsetHeight;
+            const sectionTop = section.offsetTop - 100;
+            const sectionId = section.getAttribute('id');
+            const navLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
+            
+            if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                navLinks.forEach(link => link.classList.remove('active'));
+                if (navLink) {
+                    navLink.classList.add('active');
+                }
+            }
+        });
+    }
+
+    // Update active nav link on scroll
+    window.addEventListener('scroll', updateActiveNavLink);
+
+    // ============================================
+    // Scroll Animations
+    // ============================================
+    function observeElements() {
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in-up');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all cards and sections
+        const elementsToObserve = document.querySelectorAll(
+            '.skill-card, .project-card, .education-card, .cert-card'
+        );
+        
+        elementsToObserve.forEach(el => observer.observe(el));
+    }
+
+    // Initialize scroll animations
+    observeElements();
+
+    // ============================================
+    // Contact Form Handling
+    // ============================================
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(contactForm);
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const message = formData.get('message');
+            
+            // Create mailto link (since we don't have a backend)
+            const subject = encodeURIComponent(`Contact depuis le portfolio - ${name}`);
+            const body = encodeURIComponent(`Nom: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+            const mailtoLink = `mailto:ons.ammar@edu.univ-paris13.fr?subject=${subject}&body=${body}`;
+            
+            // Open email client
+            window.location.href = mailtoLink;
+            
+            // Show success message
+            showNotification('Merci pour votre message ! Votre client email va s\'ouvrir.', 'success');
+            
+            // Reset form
+            contactForm.reset();
+        });
+    }
+
+    // ============================================
+    // Header Shadow on Scroll
+    // ============================================
+    function handleHeaderShadow() {
+        const header = document.querySelector('header');
+        if (header) {
+            if (window.scrollY > 50) {
+                header.classList.add('shadow-lg');
+            } else {
+                header.classList.remove('shadow-lg');
+            }
+        }
+    }
+
+    window.addEventListener('scroll', handleHeaderShadow);
+    handleHeaderShadow(); // Initial check
+
+    // ============================================
+    // Handle Window Resize
+    // ============================================
+    window.addEventListener('resize', () => {
+        // Close mobile menu on resize to desktop
+        if (window.innerWidth >= 768 && mobileMenu && mobileMenu.classList.contains('show')) {
             toggleMobileMenu();
         }
     });
-});
 
-// ============================================
-// Smooth Scroll for Navigation Links
-// ============================================
-navLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
-        const href = link.getAttribute('href');
-        
-        // Only handle anchor links
-        if (href.startsWith('#')) {
-            e.preventDefault();
-            const targetId = href.substring(1);
-            const targetElement = document.getElementById(targetId);
-            
-            if (targetElement) {
-                const headerOffset = 80;
-                const elementPosition = targetElement.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-                
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                });
-            }
-        }
-    });
-});
-
-// ============================================
-// Active Navigation Link on Scroll
-// ============================================
-function updateActiveNavLink() {
-    const sections = document.querySelectorAll('section[id]');
-    const scrollY = window.pageYOffset;
-    
-    sections.forEach(section => {
-        const sectionHeight = section.offsetHeight;
-        const sectionTop = section.offsetTop - 100;
-        const sectionId = section.getAttribute('id');
-        const navLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
-        
-        if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-            navLinks.forEach(link => link.classList.remove('active'));
-            if (navLink) {
-                navLink.classList.add('active');
-            }
-        }
-    });
-}
-
-// Update active nav link on scroll
-window.addEventListener('scroll', updateActiveNavLink);
-
-// ============================================
-// Scroll Animations
-// ============================================
-function observeElements() {
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('fade-in-up');
-                observer.unobserve(entry.target);
-            }
+    // ============================================
+    // Performance: Lazy Load Images (if added later)
+    // ============================================
+    if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    if (img.dataset.src) {
+                        img.src = img.dataset.src;
+                        img.removeAttribute('data-src');
+                        observer.unobserve(img);
+                    }
+                }
+            });
         });
-    }, observerOptions);
-    
-    // Observe all cards and sections
-    const elementsToObserve = document.querySelectorAll(
-        '.skill-card, .project-card, .education-card, .cert-card'
-    );
-    
-    elementsToObserve.forEach(el => observer.observe(el));
-}
+        
+        document.querySelectorAll('img[data-src]').forEach(img => {
+            imageObserver.observe(img);
+        });
+    }
 
-// Initialize scroll animations
-observeElements();
-
-// ============================================
-// Contact Form Handling
-// ============================================
-if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        
-        // Get form data
-        const formData = new FormData(contactForm);
-        const name = formData.get('name');
-        const email = formData.get('email');
-        const message = formData.get('message');
-        
-        // Create mailto link (since we don't have a backend)
-        const subject = encodeURIComponent(`Contact depuis le portfolio - ${name}`);
-        const body = encodeURIComponent(`Nom: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
-        const mailtoLink = `mailto:ons.ammar@edu.univ-paris13.fr?subject=${subject}&body=${body}`;
-        
-        // Open email client
-        window.location.href = mailtoLink;
-        
-        // Show success message
-        showNotification('Merci pour votre message ! Votre client email va s\'ouvrir.', 'success');
-        
-        // Reset form
-        contactForm.reset();
-    });
-}
+    // Add fade-in animation to hero section
+    const heroSection = document.getElementById('home');
+    if (heroSection) {
+        heroSection.classList.add('fade-in');
+    }
+});
 
 // ============================================
 // Notification System
@@ -216,87 +284,7 @@ function showNotification(message, type = 'info') {
 }
 
 // ============================================
-// Header Shadow on Scroll
-// ============================================
-function handleHeaderShadow() {
-    const header = document.querySelector('header');
-    if (window.scrollY > 50) {
-        header.classList.add('shadow-lg');
-    } else {
-        header.classList.remove('shadow-lg');
-    }
-}
-
-window.addEventListener('scroll', handleHeaderShadow);
-
-// ============================================
-// Typing Effect for Hero Section (Optional)
-// ============================================
-function typeWriter(element, text, speed = 100) {
-    let i = 0;
-    element.textContent = '';
-    
-    function type() {
-        if (i < text.length) {
-            element.textContent += text.charAt(i);
-            i++;
-            setTimeout(type, speed);
-        }
-    }
-    
-    type();
-}
-
-// ============================================
-// Initialize on DOM Load
-// ============================================
-document.addEventListener('DOMContentLoaded', () => {
-    // Initialize all features
-    updateActiveNavLink();
-    handleHeaderShadow();
-    
-    // Add fade-in animation to hero section
-    const heroSection = document.getElementById('home');
-    if (heroSection) {
-        heroSection.classList.add('fade-in');
-    }
-});
-
-// ============================================
-// Handle Window Resize
-// ============================================
-window.addEventListener('resize', () => {
-    // Close mobile menu on resize to desktop
-    if (window.innerWidth >= 768 && mobileMenu && mobileMenu.classList.contains('show')) {
-        toggleMobileMenu();
-    }
-});
-
-// ============================================
-// Performance: Lazy Load Images (if added later)
-// ============================================
-if ('IntersectionObserver' in window) {
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                if (img.dataset.src) {
-                    img.src = img.dataset.src;
-                    img.removeAttribute('data-src');
-                    observer.unobserve(img);
-                }
-            }
-        });
-    });
-    
-    document.querySelectorAll('img[data-src]').forEach(img => {
-        imageObserver.observe(img);
-    });
-}
-
-// ============================================
 // Console Message
 // ============================================
-console.log('%c👋 Bienvenue sur le portfolio de Ons Ammar!', 'color: #2563eb; font-size: 16px; font-weight: bold;');
-console.log('%cCybersecurity & Computer Engineering', 'color: #9333ea; font-size: 12px;');
-
+console.log('%c👋 Bienvenue sur le portfolio de Ons Ammar!', 'color: #ec4899; font-size: 16px; font-weight: bold;');
+console.log('%cCybersecurity & Computer Engineering', 'color: #a855f7; font-size: 12px;');
