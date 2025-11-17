@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio de Ons Ammar - Étudiante en Cybersécurité & Computer Engineering. Passionnée de cybersécurité, d'analyse, de défense et de développement.">
+    <meta name="keywords" content="cybersécurité, portfolio, Ons Ammar, cybersecurity, DevOps, stage PFE">
+    <meta name="author" content="Ons Ammar">
+    <title>Ons Ammar - Portfolio | Cybersecurity & Computer Engineering</title>
+    
+    <!-- TailwindCSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
+    
+    <!-- Header / Navigation -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-sm">
+        <nav class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <!-- Logo -->
+                <a href="#home" class="text-2xl font-bold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors">
+                    Ons Ammar
+                </a>
+                
+                <!-- Desktop Menu -->
+                <ul class="hidden md:flex items-center space-x-8">
+                    <li><a href="#home" class="nav-link">Accueil</a></li>
+                    <li><a href="#about" class="nav-link">À propos</a></li>
+                    <li><a href="#skills" class="nav-link">Compétences</a></li>
+                    <li><a href="#projects" class="nav-link">Projets</a></li>
+                    <li><a href="#education" class="nav-link">Parcours</a></li>
+                    <li><a href="#certifications" class="nav-link">Certifications</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+                
+                <!-- Dark Mode Toggle & Mobile Menu Button -->
+                <div class="flex items-center space-x-4">
+                    <button id="darkModeToggle" class="p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+                        <i class="fas fa-moon dark:hidden"></i>
+                        <i class="fas fa-sun hidden dark:inline"></i>
+                    </button>
+                    <button id="mobileMenuToggle" class="md:hidden p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <ul id="mobileMenu" class="hidden md:hidden mt-4 space-y-2 pb-4">
+                <li><a href="#home" class="nav-link block py-2">Accueil</a></li>
+                <li><a href="#about" class="nav-link block py-2">À propos</a></li>
+                <li><a href="#skills" class="nav-link block py-2">Compétences</a></li>
+                <li><a href="#projects" class="nav-link block py-2">Projets</a></li>
+                <li><a href="#education" class="nav-link block py-2">Parcours</a></li>
+                <li><a href="#certifications" class="nav-link block py-2">Certifications</a></li>
+                <li><a href="#contact" class="nav-link block py-2">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center pt-20 px-4">
+        <div class="container mx-auto text-center">
+            <div class="mb-8">
+                <div class="w-48 h-48 mx-auto mb-6 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center text-6xl font-bold text-white shadow-2xl">
+                    OA
+                </div>
+            </div>
+            <h1 class="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                Ons Ammar
+            </h1>
+            <p class="text-2xl md:text-3xl font-semibold mb-4 text-gray-700 dark:text-gray-300">
+                Étudiante en Cybersecurity & Computer Engineering
+            </p>
+            <p class="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
+                Passionnée de cybersécurité, d'analyse, de défense et de développement.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#projects" class="btn-primary">
+                    <i class="fas fa-code mr-2"></i>Voir mes projets
+                </a>
+                <a href="#contact" class="btn-secondary">
+                    <i class="fas fa-envelope mr-2"></i>Me contacter
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-4 bg-gray-50 dark:bg-gray-800">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-12">À propos de moi</h2>
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <p class="text-lg mb-4 text-gray-700 dark:text-gray-300">
+                        Passionnée par la cybersécurité et le DevOps, je m'intéresse aux bonnes pratiques de sécurité et à l'automatisation des systèmes.
+                    </p>
+                    <p class="text-lg mb-4 text-gray-700 dark:text-gray-300">
+                        Je suis actuellement en double cursus entre l'<strong>IUT de Villetaneuse - Université Sorbonne Paris Nord</strong> (BUT R&T parcours cybersécurité) et l'<strong>Institut Supérieur d'Informatique - Université Tunis El Manar</strong> (Licence en ingénierie des réseaux et systèmes informatiques).
+                    </p>
+                    <p class="text-lg mb-4 text-gray-700 dark:text-gray-300">
+                        Je cherche un stage de PFE à partir du 23 février, pour une durée de 12 à 20 semaines, avec perspective d'alternance pour appliquer mes compétences, participer à des projets concrets et développer mon expertise technique.
+                    </p>
+                    <div class="mt-6">
+                        <h3 class="text-xl font-semibold mb-3">Points clés :</h3>
+                        <ul class="space-y-2">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-blue-600 dark:text-blue-400 mr-2 mt-1"></i>
+                                <span>Double diplômation en cybersécurité et réseaux</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-blue-600 dark:text-blue-400 mr-2 mt-1"></i>
+                                <span>Intérêt pour la cybersécurité offensive et défensive</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-blue-600 dark:text-blue-400 mr-2 mt-1"></i>
+                                <span>Expérience en développement et automatisation</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-blue-600 dark:text-blue-400 mr-2 mt-1"></i>
+                                <span>Engagement dans des projets à impact social</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="flex justify-center">
+                    <div class="w-full max-w-md h-96 bg-gradient-to-br from-blue-400 to-purple-500 rounded-lg shadow-2xl flex items-center justify-center text-white text-6xl font-bold">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 px-4">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-12">Compétences</h2>
+            
+            <!-- Cybersécurité -->
+            <div class="mb-12">
+                <h3 class="text-2xl font-semibold mb-6 flex items-center">
+                    <i class="fas fa-shield-alt text-blue-600 dark:text-blue-400 mr-3"></i>
+                    Cybersécurité
+                </h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="skill-card">
+                        <i class="fas fa-eye text-3xl mb-2"></i>
+                        <span>SOC</span>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fas fa-chart-line text-3xl mb-2"></i>
+                        <span>SIEM</span>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fas fa-shield-virus text-3xl mb-2"></i>
+                        <span>EDR</span>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fas fa-bug text-3xl mb-2"></i>
+                        <span>Analyse Malware</span>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fab fa-linux text-3xl mb-2"></i>
+                        <span>Linux Hardening</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pentest & Tools -->
+            <div class="mb-12">
+                <h3 class="text-2xl font-semibold mb-6 flex items-center">
+                    <i class="fas fa-tools text-purple-600 dark:text-purple-400 mr-3"></i>
+                    Pentest & Outils
+                </h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="skill-card">
+                        <i class="fas fa-spider text-3xl mb-2"></i>
+                        <span>BurpSuite</span>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fas fa-network-wired text-3xl mb-2"></i>
+                        <span>Nmap</span>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fas fa-search text-3xl mb-2"></i>
+                        <span>Wireshark</span>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fas fa-terminal text-3xl mb-2"></i>
+                        <span>Metasploit</span>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fas fa-network-wired text-3xl mb-2"></i>
+                        <span>Cisco Packet Tracer</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Développement -->
+            <div class="mb-12">
+                <h3 class="text-2xl font-semibold mb-6 flex items-center">
+                    <i class="fas fa-code text-green-600 dark:text-green-400 mr-3"></i>
+                    Développement
+                </h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="skill-card">
+                        <i class="fab fa-python text-3xl mb-2"></i>
+                        <span>Python</span>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fas fa-terminal text-3xl mb-2"></i>
+                        <span>Bash</span>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fab fa-html5 text-3xl mb-2"></i>
+                        <span>HTML/CSS/JS</span>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fab fa-java text-3xl mb-2"></i>
+                        <span>Java</span>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fas fa-database text-3xl mb-2"></i>
+                        <span>SQLite</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Systèmes -->
+            <div class="mb-12">
+                <h3 class="text-2xl font-semibold mb-6 flex items-center">
+                    <i class="fas fa-server text-orange-600 dark:text-orange-400 mr-3"></i>
+                    Systèmes
+                </h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="skill-card">
+                        <i class="fab fa-linux text-3xl mb-2"></i>
+                        <span>Linux (Ubuntu, Kali, Parrot)</span>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fab fa-windows text-3xl mb-2"></i>
+                        <span>Windows Server</span>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fas fa-cloud text-3xl mb-2"></i>
+                        <span>Terraform</span>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fab fa-docker text-3xl mb-2"></i>
+                        <span>Docker</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Soft Skills -->
+            <div>
+                <h3 class="text-2xl font-semibold mb-6 flex items-center">
+                    <i class="fas fa-users text-pink-600 dark:text-pink-400 mr-3"></i>
+                    Soft Skills
+                </h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="skill-card">
+                        <i class="fas fa-comments text-3xl mb-2"></i>
+                        <span>Communication</span>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fas fa-check-double text-3xl mb-2"></i>
+                        <span>Rigueur</span>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fas fa-brain text-3xl mb-2"></i>
+                        <span>Gestion du stress</span>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fas fa-handshake text-3xl mb-2"></i>
+                        <span>Travail d'équipe</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 px-4 bg-gray-50 dark:bg-gray-800">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-12">Projets</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Project 1 -->
+                <div class="project-card">
+                    <div class="project-image bg-gradient-to-br from-blue-400 to-blue-600">
+                        <i class="fas fa-shield-alt text-6xl text-white"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Analyse DDoS + SIEM</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            Analyse et détection d'attaques DDoS avec implémentation d'un système SIEM pour la surveillance en temps réel.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">SIEM</span>
+                            <span class="tech-tag">Wireshark</span>
+                        </div>
+                        <a href="#" class="text-blue-600 dark:text-blue-400 hover:underline">
+                            <i class="fab fa-github mr-2"></i>Voir sur GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card">
+                    <div class="project-image bg-gradient-to-br from-purple-400 to-purple-600">
+                        <i class="fas fa-graduation-cap text-6xl text-white"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Plateforme éducative CyberMDar</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            Plateforme d'apprentissage en cybersécurité avec modules interactifs et évaluations.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="tech-tag">HTML/CSS/JS</span>
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">FastAPI</span>
+                        </div>
+                        <a href="#" class="text-blue-600 dark:text-blue-400 hover:underline">
+                            <i class="fab fa-github mr-2"></i>Voir sur GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card">
+                    <div class="project-image bg-gradient-to-br from-red-400 to-red-600">
+                        <i class="fas fa-virus text-6xl text-white"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Lab Malware Windows 7</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            Environnement de laboratoire isolé pour l'analyse de malwares avec outils de reverse engineering.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="tech-tag">VMware</span>
+                            <span class="tech-tag">Windows 7</span>
+                            <span class="tech-tag">Malware Analysis</span>
+                        </div>
+                        <a href="#" class="text-blue-600 dark:text-blue-400 hover:underline">
+                            <i class="fab fa-github mr-2"></i>Voir sur GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="project-card">
+                    <div class="project-image bg-gradient-to-br from-green-400 to-green-600">
+                        <i class="fas fa-robot text-6xl text-white"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Script Python Automatisation</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            Scripts d'automatisation pour la gestion d'infrastructure et la sécurité des systèmes.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Bash</span>
+                            <span class="tech-tag">Automation</span>
+                        </div>
+                        <a href="#" class="text-blue-600 dark:text-blue-400 hover:underline">
+                            <i class="fab fa-github mr-2"></i>Voir sur GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="project-card">
+                    <div class="project-image bg-gradient-to-br from-yellow-400 to-yellow-600">
+                        <i class="fas fa-network-wired text-6xl text-white"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Projet Réseau / VLAN / Firewall</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            Configuration de réseaux complexes avec segmentation VLAN et règles de pare-feu.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="tech-tag">Cisco</span>
+                            <span class="tech-tag">VLAN</span>
+                            <span class="tech-tag">Firewall</span>
+                        </div>
+                        <a href="#" class="text-blue-600 dark:text-blue-400 hover:underline">
+                            <i class="fab fa-github mr-2"></i>Voir sur GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 6 - Assistant IA -->
+                <div class="project-card">
+                    <div class="project-image bg-gradient-to-br from-indigo-400 to-indigo-600">
+                        <i class="fas fa-brain text-6xl text-white"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Plateforme d'Assistant IA</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            Plateforme d'assistant IA intégrant un LLM local (LLaMA.cpp) via une API Dockerisée, avec pipeline RAG et interface web complète.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="tech-tag">FastAPI</span>
+                            <span class="tech-tag">Docker</span>
+                            <span class="tech-tag">LLM</span>
+                            <span class="tech-tag">RAG</span>
+                        </div>
+                        <a href="#" class="text-blue-600 dark:text-blue-400 hover:underline">
+                            <i class="fab fa-github mr-2"></i>Voir sur GitHub
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-20 px-4">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-12">Parcours académique</h2>
+            <div class="max-w-4xl mx-auto">
+                
+                <!-- Education 1 -->
+                <div class="education-card mb-8">
+                    <div class="flex items-start">
+                        <div class="education-icon bg-blue-600">
+                            <i class="fas fa-university text-white"></i>
+                        </div>
+                        <div class="flex-1 ml-6">
+                            <h3 class="text-2xl font-semibold mb-2">BUT R&T parcours cybersécurité</h3>
+                            <p class="text-lg text-blue-600 dark:text-blue-400 mb-2">IUT de Villetaneuse - Université Sorbonne Paris Nord</p>
+                            <p class="text-gray-600 dark:text-gray-400 mb-3">Formation professionnalisante axée sur la sécurité des systèmes et réseaux, la gestion des infrastructures et la cybersécurité opérationnelle.</p>
+                            <p class="text-sm text-gray-500 dark:text-gray-500">Double Diplômation</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Education 2 -->
+                <div class="education-card mb-8">
+                    <div class="flex items-start">
+                        <div class="education-icon bg-purple-600">
+                            <i class="fas fa-graduation-cap text-white"></i>
+                        </div>
+                        <div class="flex-1 ml-6">
+                            <h3 class="text-2xl font-semibold mb-2">Licence en ingénierie des réseaux et systèmes informatiques</h3>
+                            <p class="text-lg text-purple-600 dark:text-purple-400 mb-2">Institut Supérieur d'Informatique - Université Tunis El Manar</p>
+                            <p class="text-gray-600 dark:text-gray-400 mb-3">Formation approfondie en réseaux, systèmes et sécurité informatique.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Education 3 -->
+                <div class="education-card">
+                    <div class="flex items-start">
+                        <div class="education-icon bg-green-600">
+                            <i class="fas fa-certificate text-white"></i>
+                        </div>
+                        <div class="flex-1 ml-6">
+                            <h3 class="text-2xl font-semibold mb-2">Baccalauréat filière mathématiques</h3>
+                            <p class="text-lg text-green-600 dark:text-green-400 mb-2">Lycée Pilote Menzah 8</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certifications" class="py-20 px-4 bg-gray-50 dark:bg-gray-800">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-12">Certifications</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- Certification 1 -->
+                <div class="cert-card">
+                    <div class="cert-icon bg-blue-600">
+                        <i class="fas fa-shield-alt text-white text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Cyber Threat Management</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-2">Cisco Networking Academy</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-500">Octobre 2025</p>
+                </div>
+
+                <!-- Certification 2 -->
+                <div class="cert-card">
+                    <div class="cert-icon bg-purple-600">
+                        <i class="fas fa-lock text-white text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Introduction to Cybersecurity</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-2">Cisco Networking Academy</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-500">Octobre 2025</p>
+                </div>
+
+                <!-- Certification 3 -->
+                <div class="cert-card">
+                    <div class="cert-icon bg-green-600">
+                        <i class="fas fa-code text-white text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Programming For Everybody</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-2">University of Michigan</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-500">Novembre 2023</p>
+                </div>
+
+                <!-- Certification 4 -->
+                <div class="cert-card">
+                    <div class="cert-icon bg-orange-600">
+                        <i class="fas fa-laptop-code text-white text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Programming Fundamentals</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-2">Duke University</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-500">Novembre 2023</p>
+                </div>
+
+                <!-- TryHackMe Placeholder -->
+                <div class="cert-card">
+                    <div class="cert-icon bg-red-600">
+                        <i class="fas fa-terminal text-white text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">TryHackMe Badges</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-2">En cours</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-500">Progression continue</p>
+                </div>
+
+                <!-- HackTheBox Placeholder -->
+                <div class="cert-card">
+                    <div class="cert-icon bg-yellow-600">
+                        <i class="fas fa-box text-white text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">HackTheBox Progression</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-2">En cours</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-500">Progression continue</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-4">
+        <div class="container mx-auto max-w-2xl">
+            <h2 class="text-4xl font-bold text-center mb-12">Contact</h2>
+            
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
+                <!-- Contact Info -->
+                <div class="grid md:grid-cols-2 gap-6 mb-8">
+                    <div class="flex items-center space-x-4">
+                        <div class="contact-icon bg-blue-600">
+                            <i class="fas fa-envelope text-white"></i>
+                        </div>
+                        <div>
+                            <p class="font-semibold">Email</p>
+                            <a href="mailto:ons.ammar@edu.univ-paris13.fr" class="text-blue-600 dark:text-blue-400 hover:underline">
+                                ons.ammar@edu.univ-paris13.fr
+                            </a>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="contact-icon bg-green-600">
+                            <i class="fas fa-phone text-white"></i>
+                        </div>
+                        <div>
+                            <p class="font-semibold">Téléphone</p>
+                            <a href="tel:+33743692535" class="text-green-600 dark:text-green-400 hover:underline">
+                                +33 7 43 69 25 35
+                            </a>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="contact-icon bg-blue-700">
+                            <i class="fab fa-linkedin text-white"></i>
+                        </div>
+                        <div>
+                            <p class="font-semibold">LinkedIn</p>
+                            <a href="#" class="text-blue-700 dark:text-blue-400 hover:underline" target="_blank">
+                                Profil LinkedIn
+                            </a>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="contact-icon bg-gray-800 dark:bg-gray-600">
+                            <i class="fab fa-github text-white"></i>
+                        </div>
+                        <div>
+                            <p class="font-semibold">GitHub</p>
+                            <a href="https://github.com/AMMARRRRRons" class="text-gray-800 dark:text-gray-300 hover:underline" target="_blank">
+                                AMMARRRRRons
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <form id="contactForm" class="space-y-6">
+                    <div>
+                        <label for="name" class="block text-sm font-medium mb-2">Nom</label>
+                        <input type="text" id="name" name="name" required
+                            class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium mb-2">Email</label>
+                        <input type="email" id="email" name="email" required
+                            class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700">
+                    </div>
+                    <div>
+                        <label for="message" class="block text-sm font-medium mb-2">Message</label>
+                        <textarea id="message" name="message" rows="5" required
+                            class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700"></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary w-full">
+                        <i class="fas fa-paper-plane mr-2"></i>Envoyer le message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 py-8 px-4">
+        <div class="container mx-auto text-center">
+            <div class="flex justify-center space-x-6 mb-4">
+                <a href="#" class="hover:text-blue-400 transition-colors" target="_blank" aria-label="LinkedIn">
+                    <i class="fab fa-linkedin text-2xl"></i>
+                </a>
+                <a href="https://github.com/AMMARRRRRons" class="hover:text-gray-100 transition-colors" target="_blank" aria-label="GitHub">
+                    <i class="fab fa-github text-2xl"></i>
+                </a>
+                <a href="mailto:ons.ammar@edu.univ-paris13.fr" class="hover:text-red-400 transition-colors" aria-label="Email">
+                    <i class="fas fa-envelope text-2xl"></i>
+                </a>
+            </div>
+            <p class="text-sm">
+                &copy; 2025 Ons Ammar. Tous droits réservés.
+            </p>
+            <p class="text-xs mt-2 text-gray-500">
+                Portfolio développé avec HTML, CSS et JavaScript
+            </p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
+

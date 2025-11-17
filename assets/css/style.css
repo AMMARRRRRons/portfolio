@@ -1,0 +1,228 @@
+/* ============================================
+   Custom Styles for Ons Ammar Portfolio
+   ============================================ */
+
+/* Global Styles */
+* {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Navigation Links */
+.nav-link {
+    @apply text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 relative;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(to right, #2563eb, #9333ea);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* Buttons */
+.btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300;
+}
+
+.btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3 bg-white dark:bg-gray-800 border-2 border-blue-600 dark:border-blue-400 text-blue-600 dark:text-blue-400 font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300;
+}
+
+/* Skill Cards */
+.skill-card {
+    @apply bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md hover:shadow-xl transform hover:scale-105 transition-all duration-300 flex flex-col items-center justify-center text-center cursor-pointer border border-gray-200 dark:border-gray-700;
+}
+
+.skill-card:hover {
+    @apply border-blue-500 dark:border-blue-400;
+}
+
+.skill-card i {
+    @apply text-blue-600 dark:text-blue-400 mb-3;
+}
+
+.skill-card span {
+    @apply text-sm font-medium text-gray-700 dark:text-gray-300;
+}
+
+/* Project Cards */
+.project-card {
+    @apply bg-white dark:bg-gray-800 rounded-lg shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 overflow-hidden;
+}
+
+.project-image {
+    @apply w-full h-48 flex items-center justify-center;
+}
+
+.tech-tag {
+    @apply px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs font-semibold rounded-full;
+}
+
+/* Education Cards */
+.education-card {
+    @apply bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg hover:shadow-xl transition-all duration-300 border-l-4 border-blue-600;
+}
+
+.education-icon {
+    @apply w-16 h-16 rounded-full flex items-center justify-center flex-shrink-0;
+}
+
+/* Certification Cards */
+.cert-card {
+    @apply bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 text-center border border-gray-200 dark:border-gray-700;
+}
+
+.cert-icon {
+    @apply w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4;
+}
+
+/* Contact Icons */
+.contact-icon {
+    @apply w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Fade in animation for sections */
+section {
+    animation: fadeIn 0.6s ease-in;
+}
+
+/* Scroll animations */
+.fade-in-up {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* Smooth transitions for dark mode */
+* {
+    transition-property: background-color, border-color, color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    @apply bg-gray-100 dark:bg-gray-800;
+}
+
+::-webkit-scrollbar-thumb {
+    @apply bg-blue-600 dark:bg-blue-400 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    @apply bg-blue-700 dark:bg-blue-500;
+}
+
+/* Mobile menu animation */
+#mobileMenu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+
+#mobileMenu.show {
+    max-height: 500px;
+    transition: max-height 0.3s ease-in;
+}
+
+/* Hero section gradient animation */
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.bg-gradient-animated {
+    background-size: 200% 200%;
+    animation: gradient 3s ease infinite;
+}
+
+/* Loading animation for images */
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+.loading {
+    background: linear-gradient(to right, #f0f0f0 8%, #e0e0e0 18%, #f0f0f0 33%);
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite linear;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .skill-card {
+        @apply p-4;
+    }
+    
+    .project-card {
+        @apply mb-4;
+    }
+    
+    .education-card {
+        @apply p-4;
+    }
+    
+    .cert-card {
+        @apply p-4;
+    }
+}
+
+/* Print styles */
+@media print {
+    header,
+    footer,
+    #contact {
+        display: none;
+    }
+    
+    section {
+        page-break-inside: avoid;
+    }
+}
+
