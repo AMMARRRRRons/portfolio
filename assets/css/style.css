@@ -197,10 +197,19 @@ section {
 /* Photo styling */
 img[alt="Ons Ammar"] {
     transition: transform 0.3s ease;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 img[alt="Ons Ammar"]:hover {
     transform: scale(1.05);
+}
+
+/* Fallback if image doesn't load */
+img[alt="Ons Ammar"][src*="image.png"] {
+    background: linear-gradient(to bottom right, #3b82f6, #8b5cf6);
 }
 
 /* Responsive adjustments */

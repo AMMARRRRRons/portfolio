@@ -30,13 +30,15 @@ function toggleDarkMode() {
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
 }
 
-// Initialize dark mode on page load
+// Initialize dark mode immediately (before DOM is ready to avoid flash)
 initDarkMode();
 
-// Event listener for dark mode toggle
-if (darkModeToggle) {
-    darkModeToggle.addEventListener('click', toggleDarkMode);
-}
+// Event listener for dark mode toggle (wait for DOM)
+document.addEventListener('DOMContentLoaded', () => {
+    if (darkModeToggle) {
+        darkModeToggle.addEventListener('click', toggleDarkMode);
+    }
+});
 
 // ============================================
 // Mobile Menu Toggle
@@ -250,7 +252,6 @@ function typeWriter(element, text, speed = 100) {
 // ============================================
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize all features
-    initDarkMode();
     updateActiveNavLink();
     handleHeaderShadow();
     
