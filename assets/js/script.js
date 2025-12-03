@@ -6,14 +6,15 @@
 // Dark Mode Toggle
 // ============================================
 function initDarkMode() {
-    // Check for saved theme preference or default to light mode
+    // Garder la valeur sauvegardée mais ne pas forcer ici :
+    // le script inline dans index.html gère déjà l'état initial
     const savedTheme = localStorage.getItem('theme');
-    
+    const html = document.documentElement;
+
     if (savedTheme === 'dark') {
-        document.documentElement.classList.add('dark');
-    } else {
-        document.documentElement.classList.remove('dark');
-        localStorage.setItem('theme', 'light');
+        html.classList.add('dark');
+    } else if (savedTheme === 'light') {
+        html.classList.remove('dark');
     }
 }
 
@@ -48,24 +49,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Dark Mode Toggle Event Listener
     // ============================================
     if (darkModeToggle) {
-        // Ajouter l'event listener avec plusieurs méthodes pour être sûr
-        darkModeToggle.onclick = function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            console.log('Bouton cliqué - toggle dark mode');
+        darkModeToggle.addEventListener('click', function() {
             toggleDarkMode();
-            return false;
-        };
-        
-        darkModeToggle.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            console.log('Bouton cliqué (addEventListener) - toggle dark mode');
-            toggleDarkMode();
-            return false;
         });
-        
-        console.log('✅ Dark mode toggle button trouvé et event listeners attachés');
+        console.log('✅ Dark mode toggle button trouvé et event listener attaché');
     } else {
         console.error('❌ Dark mode toggle button non trouvé!');
     }
