@@ -214,21 +214,21 @@ body {
 /* Force uniform size for all education icons and images */
 .education-card .education-icon,
 .education-card .education-image-container {
-    width: 80px !important;
-    height: 80px !important;
-    min-width: 80px !important;
-    min-height: 80px !important;
-    max-width: 80px !important;
-    max-height: 80px !important;
+    width: 120px !important;
+    height: 120px !important;
+    min-width: 120px !important;
+    min-height: 120px !important;
+    max-width: 120px !important;
+    max-height: 120px !important;
 }
 
 .education-icon {
-    width: 80px !important;
-    height: 80px !important;
-    min-width: 80px !important;
-    min-height: 80px !important;
-    max-width: 80px !important;
-    max-height: 80px !important;
+    width: 120px !important;
+    height: 120px !important;
+    min-width: 120px !important;
+    min-height: 120px !important;
+    max-width: 120px !important;
+    max-height: 120px !important;
     border-radius: 50% !important;
     display: flex !important;
     align-items: center !important;
@@ -240,21 +240,21 @@ body {
 
 .education-image-container {
     padding: 0 !important;
-    width: 80px !important;
-    height: 80px !important;
-    min-width: 80px !important;
-    min-height: 80px !important;
-    max-width: 80px !important;
-    max-height: 80px !important;
+    width: 120px !important;
+    height: 120px !important;
+    min-width: 120px !important;
+    min-height: 120px !important;
+    max-width: 120px !important;
+    max-height: 120px !important;
 }
 
 .education-image {
-    width: 80px !important;
-    height: 80px !important;
-    min-width: 80px !important;
-    min-height: 80px !important;
-    max-width: 80px !important;
-    max-height: 80px !important;
+    width: 120px !important;
+    height: 120px !important;
+    min-width: 120px !important;
+    min-height: 120px !important;
+    max-width: 120px !important;
+    max-height: 120px !important;
     object-fit: cover !important;
     object-position: center !important;
     border-radius: 50% !important;
