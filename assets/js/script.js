@@ -265,6 +265,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeModal = document.getElementById('closeModal');
 
     function openAchievementModal(imageSrc, title) {
+        console.log('Opening modal with:', imageSrc, title); // Debug
         if (modalImage && modalTitle && achievementModal) {
             modalImage.src = imageSrc;
             modalImage.alt = title;
@@ -274,6 +275,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 achievementModal.classList.add('show');
             }, 10);
             document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        } else {
+            console.error('Modal elements not found:', { modalImage, modalTitle, achievementModal });
         }
     }
 
@@ -323,16 +326,33 @@ document.addEventListener('DOMContentLoaded', () => {
     // Certification Modal Handling
     // ============================================
     const certificationCards = document.querySelectorAll('.certification-card');
+    console.log('Found certification cards:', certificationCards.length); // Debug
 
     // Add click event listeners to certification cards
-    certificationCards.forEach(card => {
+    certificationCards.forEach((card, index) => {
+        console.log(`Setting up card ${index}:`, card); // Debug
+        
+        // Make sure the card is clickable
+        card.style.cursor = 'pointer';
+        
         card.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
             const imageSrc = card.getAttribute('data-image');
             const title = card.getAttribute('data-title');
+            console.log('Certification clicked:', imageSrc, title); // Debug
             if (imageSrc) {
                 openAchievementModal(imageSrc, title);
+            } else {
+                console.error('No image source found for certification card');
             }
-        });
+        }, true); // Use capture phase to catch events early
+        
+        // Prevent image clicks from interfering
+        const cardImage = card.querySelector('img');
+        if (cardImage) {
+            cardImage.style.pointerEvents = 'none'; // Let clicks pass through to parent
+        }
     });
 });
 
