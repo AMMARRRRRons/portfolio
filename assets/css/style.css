@@ -213,6 +213,24 @@ body {
 
 .education-icon {
     @apply w-16 h-16 rounded-full flex items-center justify-center flex-shrink-0;
+    overflow: hidden;
+    position: relative;
+}
+
+.education-image-container {
+    padding: 0;
+}
+
+.education-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+.education-image:hover {
+    transform: scale(1.1);
 }
 
 /* Certification Cards */
