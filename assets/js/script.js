@@ -65,15 +65,17 @@ document.addEventListener('DOMContentLoaded', () => {
             // Avec Tailwind, le menu est caché avec la classe "hidden"
             // On la retire / ajoute simplement pour afficher ou masquer
             mobileMenu.classList.toggle('hidden');
-            const icon = mobileMenuToggle?.querySelector('i');
-            if (icon) {
-                const isOpen = !mobileMenu.classList.contains('hidden');
-                if (isOpen) {
-                    icon.classList.remove('fa-bars');
-                    icon.classList.add('fa-times');
-                } else {
-                    icon.classList.remove('fa-times');
-                    icon.classList.add('fa-bars');
+            if (mobileMenuToggle) {
+                const icon = mobileMenuToggle.querySelector('i');
+                if (icon) {
+                    const isOpen = !mobileMenu.classList.contains('hidden');
+                    if (isOpen) {
+                        icon.classList.remove('fa-bars');
+                        icon.classList.add('fa-times');
+                    } else {
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    }
                 }
             }
         }
