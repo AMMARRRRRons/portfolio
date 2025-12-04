@@ -62,14 +62,23 @@ document.addEventListener('DOMContentLoaded', () => {
     // ============================================
     function toggleMobileMenu() {
         if (mobileMenu) {
-            // Avec Tailwind, le menu est caché avec la classe "hidden"
-            // On la retire / ajoute simplement pour afficher ou masquer
-            mobileMenu.classList.toggle('hidden');
+            // État ouvert/fermé basé sur la classe "show" (voir CSS #mobileMenu.show)
+            const isOpen = mobileMenu.classList.contains('show');
+
+            if (isOpen) {
+                // Fermer le menu
+                mobileMenu.classList.remove('show');
+                mobileMenu.classList.add('hidden');
+            } else {
+                // Ouvrir le menu
+                mobileMenu.classList.remove('hidden');
+                mobileMenu.classList.add('show');
+            }
+
             if (mobileMenuToggle) {
                 const icon = mobileMenuToggle.querySelector('i');
                 if (icon) {
-                    const isOpen = !mobileMenu.classList.contains('hidden');
-                    if (isOpen) {
+                    if (!isOpen) {
                         icon.classList.remove('fa-bars');
                         icon.classList.add('fa-times');
                     } else {
@@ -89,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Close mobile menu when clicking on a link
     navLinks.forEach(link => {
         link.addEventListener('click', () => {
-            if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+            if (mobileMenu && mobileMenu.classList.contains('show')) {
                 toggleMobileMenu();
             }
         });
@@ -227,7 +236,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ============================================
     window.addEventListener('resize', () => {
         // Close mobile menu on resize to desktop
-        if (window.innerWidth >= 768 && mobileMenu && !mobileMenu.classList.contains('hidden')) {
+        if (window.innerWidth >= 768 && mobileMenu && mobileMenu.classList.contains('show')) {
             toggleMobileMenu(); // referme le menu et remet l’icône "bars"
         }
     });
