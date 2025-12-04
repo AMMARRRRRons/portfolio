@@ -62,10 +62,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // ============================================
     function toggleMobileMenu() {
         if (mobileMenu) {
-            mobileMenu.classList.toggle('show');
+            // Avec Tailwind, le menu est caché avec la classe "hidden"
+            // On la retire / ajoute simplement pour afficher ou masquer
+            mobileMenu.classList.toggle('hidden');
             const icon = mobileMenuToggle?.querySelector('i');
             if (icon) {
-                if (mobileMenu.classList.contains('show')) {
+                const isOpen = !mobileMenu.classList.contains('hidden');
+                if (isOpen) {
                     icon.classList.remove('fa-bars');
                     icon.classList.add('fa-times');
                 } else {
@@ -84,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Close mobile menu when clicking on a link
     navLinks.forEach(link => {
         link.addEventListener('click', () => {
-            if (mobileMenu && mobileMenu.classList.contains('show')) {
+            if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
                 toggleMobileMenu();
             }
         });
@@ -222,8 +225,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // ============================================
     window.addEventListener('resize', () => {
         // Close mobile menu on resize to desktop
-        if (window.innerWidth >= 768 && mobileMenu && mobileMenu.classList.contains('show')) {
-            toggleMobileMenu();
+        if (window.innerWidth >= 768 && mobileMenu && !mobileMenu.classList.contains('hidden')) {
+            toggleMobileMenu(); // referme le menu et remet l’icône "bars"
         }
     });
 
