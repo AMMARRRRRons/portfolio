@@ -427,6 +427,22 @@ document.addEventListener('DOMContentLoaded', () => {
             cardImage.style.pointerEvents = 'none'; // Let clicks pass through to parent
         }
     });
+
+    // ============================================
+    // Welcome Banner
+    // ============================================
+    const welcomeBanner = document.getElementById('welcomeBanner');
+    const closeWelcomeBanner = document.getElementById('closeWelcomeBanner');
+
+    function hideWelcomeBanner() {
+        if (welcomeBanner) {
+            welcomeBanner.classList.add('hidden');
+        }
+    }
+
+    if (closeWelcomeBanner) {
+        closeWelcomeBanner.addEventListener('click', hideWelcomeBanner);
+    }
 });
 
 // ============================================
