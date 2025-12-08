@@ -182,6 +182,10 @@ body {
     @apply bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md hover:shadow-xl transform hover:scale-105 transition-all duration-300 flex flex-col items-center justify-center text-center cursor-pointer border border-gray-200 dark:border-gray-700;
 }
 
+.rt-card {
+    @apply border-2 border-pink-200/80 dark:border-pink-800/60 shadow-lg dark:shadow-pink-900/30;
+}
+
 .interest-card {
     @apply bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-200 dark:border-gray-700 flex flex-col;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
