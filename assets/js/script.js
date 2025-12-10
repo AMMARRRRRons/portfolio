@@ -482,5 +482,5 @@ function showNotification(message, type = 'info') {
 // ============================================
 // Console Message
 // ============================================
-console.log('%c👋 Bienvenue sur le portfolio de Ons Ammar!', 'color: #ec4899; font-size: 16px; font-weight: bold;');
-console.log('%cCybersecurity & Computer Engineering', 'color: #a855f7; font-size: 12px;');
+console.log('%c👋 Bienvenue sur le portfolio de Ons Ammar!', 'color: #ff2f81; font-size: 16px; font-weight: bold;');
+console.log('%cCybersecurity & Computer Engineering', 'color: #38b7ff; font-size: 12px;');
