@@ -38,13 +38,11 @@ initDarkMode();
 
 // Wait for DOM to be ready
 const RECIPIENT_EMAIL = 'ons.ammar@edu.univ-paris13.fr';
-// Utilisation de Formspree avec l'option noredirect pour éviter la redirection
-// IMPORTANT: Remplacez YOUR_FORM_ID par votre Form ID Formspree
-// Créez un compte gratuit sur https://formspree.io/ et obtenez votre Form ID
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
+// Utilisation de FormSubmit en mode AJAX (pas de redirection)
+const FORMSUBMIT_ENDPOINT = `https://formsubmit.co/ajax/${RECIPIENT_EMAIL}`;
 
 async function sendFormData(formData) {
-    const response = await fetch(FORMSPREE_ENDPOINT, {
+    const response = await fetch(FORMSUBMIT_ENDPOINT, {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -54,8 +52,14 @@ async function sendFormData(formData) {
     });
 
     if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Erreur lors de l\'envoi de l\'email');
+        const errorText = await response.text();
+        let errorData;
+        try {
+            errorData = JSON.parse(errorText);
+        } catch (e) {
+            errorData = { message: errorText || 'Erreur lors de l\'envoi' };
+        }
+        throw new Error(errorData.message || errorData.error || 'Erreur lors de l\'envoi de l\'email');
     }
 
     return await response.json();
@@ -227,13 +231,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const emailContent = `${name}, ${email}, ${message}`;
             
             const payload = {
-                _to: RECIPIENT_EMAIL,
-                _subject: `Contact portfolio - ${name || 'Anonyme'}`,
-                _replyto: email,
                 name: name,
                 email: email,
                 message: emailContent,
-                _format: 'plain'
+                _subject: `Contact portfolio - ${name || 'Anonyme'}`,
+                _replyto: email,
+                _captcha: false,
+                _template: 'box'
             };
 
             try {
@@ -241,8 +245,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 showNotification('Merci pour votre message ! Il a été envoyé.', 'success');
                 contactForm.reset();
             } catch (err) {
-                console.error(err);
-                showNotification('Envoi impossible pour le moment. Réessayez plus tard.', 'error');
+                console.error('Erreur:', err);
+                showNotification(err.message || 'Envoi impossible pour le moment. Réessayez plus tard.', 'error');
             }
         });
     }
@@ -259,11 +263,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const emailContent = `${name}, ${advice}`;
 
             const payload = {
-                _to: RECIPIENT_EMAIL,
-                _subject: `Recommandation portfolio - ${name}`,
                 name: name,
                 conseil: emailContent,
-                _format: 'plain'
+                _subject: `Recommandation portfolio - ${name}`,
+                _captcha: false,
+                _template: 'box'
             };
 
             try {
@@ -271,8 +275,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 showNotification('Merci pour votre conseil ! Il a été envoyé.', 'success');
                 adviceForm.reset();
             } catch (err) {
-                console.error(err);
-                showNotification('Envoi impossible pour le moment. Réessayez plus tard.', 'error');
+                console.error('Erreur:', err);
+                showNotification(err.message || 'Envoi impossible pour le moment. Réessayez plus tard.', 'error');
             }
         });
     }
