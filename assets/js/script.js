@@ -37,29 +37,85 @@ function toggleDarkMode() {
 initDarkMode();
 
 // Wait for DOM to be ready
-const RECIPIENT_EMAIL = 'ons.ammar@edu.univ-paris13.fr';
-// Utilisation de FormSubmit en mode AJAX (pas de redirection)
-const FORMSUBMIT_ENDPOINT = `https://formsubmit.co/ajax/${RECIPIENT_EMAIL}`;
+const RECIPIENT_EMAIL = 'ons.ammar@etudiant-isi.utm.tn';
 
-async function sendFormData(formData) {
+// ============================================
+// EmailJS Configuration
+// ============================================
+// IMPORTANT: Suivez le guide GUIDE_EMAILJS_PAS_A_PAS.md pour configurer
+// 
+// ÉTAPES RAPIDES:
+// 1. Créez un compte sur https://www.emailjs.com/ (gratuit)
+// 2. Ajoutez un service email (Gmail) -> copiez le Service ID
+// 3. Créez un template email -> copiez le Template ID  
+// 4. Obtenez votre Public Key dans Account > General
+// 5. Remplacez les valeurs ci-dessous par vos identifiants
+//
+// REMPLACEZ CES VALEURS PAR VOS VRAIS IDENTIFIANTS:
+const EMAILJS_SERVICE_ID = 'service_rwbacqf';        // ✅ Service ID configuré
+const EMAILJS_TEMPLATE_ID = 'template_9rkyugg';      // ✅ Template ID configuré
+const EMAILJS_PUBLIC_KEY = 'UWtXhwew_bc1pYDG5';       // ⬅️ Remplacez par votre Public Key (obtenez-la dans EmailJS > Account > General > API Keys)
+
+// Initialize EmailJS si configuré
+(function() {
+    if (typeof emailjs !== 'undefined' && EMAILJS_PUBLIC_KEY !== 'YOUR_PUBLIC_KEY') {
+        emailjs.init(EMAILJS_PUBLIC_KEY);
+    }
+})();
+
+async function sendFormData(templateParams) {
+    // Vérifier si EmailJS est disponible
+    if (typeof emailjs === 'undefined') {
+        throw new Error('EmailJS n\'est pas chargé. Vérifiez votre connexion internet.');
+    }
+
+    // Vérifier si EmailJS est configuré
+    if (EMAILJS_PUBLIC_KEY === 'YOUR_PUBLIC_KEY' || 
+        EMAILJS_SERVICE_ID === 'service_portfolio' || 
+        EMAILJS_TEMPLATE_ID === 'template_portfolio') {
+        // Essayer avec FormSubmit en fallback
+        return await sendFormDataFallback(templateParams);
+    }
+
+    try {
+        const response = await emailjs.send(
+            EMAILJS_SERVICE_ID,
+            EMAILJS_TEMPLATE_ID,
+            templateParams
+        );
+        return response;
+    } catch (error) {
+        console.error('Erreur EmailJS:', error);
+        // Essayer avec FormSubmit en fallback
+        return await sendFormDataFallback(templateParams);
+    }
+}
+
+// Fallback avec FormSubmit
+async function sendFormDataFallback(data) {
+    const FORMSUBMIT_ENDPOINT = `https://formsubmit.co/ajax/${RECIPIENT_EMAIL}`;
+    const formData = new FormData();
+    
+    // Convertir les données en format FormSubmit
+    if (data.to_email) formData.append('_to', data.to_email);
+    if (data.subject) formData.append('_subject', data.subject);
+    if (data.from_email) formData.append('_replyto', data.from_email);
+    if (data.message) formData.append('message', data.message);
+    if (data.from_name) formData.append('name', data.from_name);
+    formData.append('_next', window.location.href);
+    formData.append('_captcha', 'false');
+
     const response = await fetch(FORMSUBMIT_ENDPOINT, {
         method: 'POST',
         headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Accept': 'application/json'
         },
-        body: JSON.stringify(formData)
+        body: formData
     });
 
     if (!response.ok) {
         const errorText = await response.text();
-        let errorData;
-        try {
-            errorData = JSON.parse(errorText);
-        } catch (e) {
-            errorData = { message: errorText || 'Erreur lors de l\'envoi' };
-        }
-        throw new Error(errorData.message || errorData.error || 'Erreur lors de l\'envoi de l\'email');
+        throw new Error(`Erreur: ${errorText || 'Impossible d\'envoyer l\'email'}`);
     }
 
     return await response.json();
@@ -230,18 +286,16 @@ document.addEventListener('DOMContentLoaded', () => {
             // Format email content as requested: "Nom, Email, Message"
             const emailContent = `${name}, ${email}, ${message}`;
             
-            const payload = {
-                name: name,
-                email: email,
+            const templateParams = {
+                to_email: RECIPIENT_EMAIL,
+                from_name: name,
+                from_email: email,
                 message: emailContent,
-                _subject: `Contact portfolio - ${name || 'Anonyme'}`,
-                _replyto: email,
-                _captcha: false,
-                _template: 'box'
+                subject: `Contact portfolio - ${name || 'Anonyme'}`
             };
 
             try {
-                await sendFormData(payload);
+                const result = await sendFormData(templateParams);
                 showNotification('Merci pour votre message ! Il a été envoyé.', 'success');
                 contactForm.reset();
             } catch (err) {
@@ -262,16 +316,15 @@ document.addEventListener('DOMContentLoaded', () => {
             // Format email content as requested: "Nom, Conseil"
             const emailContent = `${name}, ${advice}`;
 
-            const payload = {
-                name: name,
-                conseil: emailContent,
-                _subject: `Recommandation portfolio - ${name}`,
-                _captcha: false,
-                _template: 'box'
+            const templateParams = {
+                to_email: RECIPIENT_EMAIL,
+                from_name: name,
+                message: emailContent,
+                subject: `Recommandation portfolio - ${name}`
             };
 
             try {
-                await sendFormData(payload);
+                const result = await sendFormData(templateParams);
                 showNotification('Merci pour votre conseil ! Il a été envoyé.', 'success');
                 adviceForm.reset();
             } catch (err) {
