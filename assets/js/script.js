@@ -37,20 +37,28 @@ function toggleDarkMode() {
 initDarkMode();
 
 // Wait for DOM to be ready
-const MAIL_ENDPOINT = 'https://formsubmit.co/ajax/ons.ammar@edu.univ-paris13.fr';
-const COMMON_HEADERS = { 'Accept': 'application/json' };
+const RECIPIENT_EMAIL = 'ons.ammar@edu.univ-paris13.fr';
+// Utilisation de Formspree avec l'option noredirect pour éviter la redirection
+// IMPORTANT: Remplacez YOUR_FORM_ID par votre Form ID Formspree
+// Créez un compte gratuit sur https://formspree.io/ et obtenez votre Form ID
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
 
 async function sendFormData(formData) {
-    const response = await fetch(MAIL_ENDPOINT, {
+    const response = await fetch(FORMSPREE_ENDPOINT, {
         method: 'POST',
-        headers: COMMON_HEADERS,
-        body: formData
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
     });
 
     if (!response.ok) {
-        const message = await response.text();
-        throw new Error(message || 'Erreur réseau');
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Erreur lors de l\'envoi de l\'email');
     }
+
+    return await response.json();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -215,12 +223,18 @@ document.addEventListener('DOMContentLoaded', () => {
             const email = formData.get('email');
             const message = formData.get('message');
             
-            const payload = new FormData();
-            payload.append('Nom', name);
-            payload.append('Email', email);
-            payload.append('Message', message);
-            payload.append('_subject', `Contact portfolio - ${name || 'Anonyme'}`);
-            payload.append('_replyto', email);
+            // Format email content as requested: "Nom, Email, Message"
+            const emailContent = `${name}, ${email}, ${message}`;
+            
+            const payload = {
+                _to: RECIPIENT_EMAIL,
+                _subject: `Contact portfolio - ${name || 'Anonyme'}`,
+                _replyto: email,
+                name: name,
+                email: email,
+                message: emailContent,
+                _format: 'plain'
+            };
 
             try {
                 await sendFormData(payload);
@@ -241,10 +255,16 @@ document.addEventListener('DOMContentLoaded', () => {
             const name = formData.get('advice-name') || 'Anonyme';
             const advice = formData.get('advice-message') || '';
 
-            const payload = new FormData();
-            payload.append('Nom', name);
-            payload.append('Conseil', advice);
-            payload.append('_subject', `Recommandation portfolio - ${name}`);
+            // Format email content as requested: "Nom, Conseil"
+            const emailContent = `${name}, ${advice}`;
+
+            const payload = {
+                _to: RECIPIENT_EMAIL,
+                _subject: `Recommandation portfolio - ${name}`,
+                name: name,
+                conseil: emailContent,
+                _format: 'plain'
+            };
 
             try {
                 await sendFormData(payload);
